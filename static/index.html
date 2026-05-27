@@ -3,21 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Professional Portfolio Website of Rohit Jha - Full Stack Developer, React Developer, and BCA Student specializing in AI & Machine Learning. Explore my projects, core skills, and contact details.">
+    <meta name="description" content="Rohit Jha is a Full Stack Developer and AI/ML Specialist based in Jaipur, India — specializing in web architecture, RESTful APIs, deep learning integrations, and responsive UI development with React, Flask, and Python.">
     <meta name="keywords" content="Rohit Jha, Full Stack Developer, React Developer, Web Developer, Frontend Developer, Portfolio Website, BCA Student, JavaScript Developer, Python Developer, Flask, SQLite, AI, Machine Learning, Portfolio">
     <link rel="canonical" href="https://rohit-portfolio-pi-mocha.vercel.app/">
     
     <!-- Open Graph / Facebook / LinkedIn -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Rohit Jha | Full Stack Developer & React Developer Portfolio">
-    <meta property="og:description" content="Explore modern web applications, skills, and accomplishments of Rohit Jha, a Full Stack Developer, React Developer, and BCA Student building high-performance solutions.">
+    <meta property="og:title" content="Rohit Jha | Full Stack Developer & AI/ML Specialist | Jaipur">
+    <meta property="og:description" content="Rohit Jha is a Full Stack Developer and AI/ML Specialist based in Jaipur, India — specializing in web architecture, RESTful APIs, deep learning integrations, and responsive UI development with React, Flask, and Python.">
     <meta property="og:image" content="https://rohit-portfolio-pi-mocha.vercel.app/static/images/avatar.webp">
     <meta property="og:url" content="https://rohit-portfolio-pi-mocha.vercel.app/">
     
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Rohit Jha | Full Stack Developer & React Developer Portfolio">
-    <meta name="twitter:description" content="Explore modern web applications, skills, and accomplishments of Rohit Jha, a Full Stack Developer, React Developer, and BCA Student building high-performance solutions.">
+    <meta name="twitter:title" content="Rohit Jha | Full Stack Developer & AI/ML Specialist | Jaipur">
+    <meta name="twitter:description" content="Rohit Jha is a Full Stack Developer and AI/ML Specialist based in Jaipur, India — specializing in web architecture, RESTful APIs, deep learning integrations, and responsive UI development with React, Flask, and Python.">
     <meta name="twitter:image" content="https://rohit-portfolio-pi-mocha.vercel.app/static/images/avatar.webp">
 
     <!-- JSON-LD Structured Data (Person, WebSite, ProfilePage Schema) -->
@@ -61,7 +61,7 @@
     ]
     </script>
 
-    <title>Rohit Jha | Full Stack Developer & React Developer</title>
+    <title>Rohit Jha | Full Stack Developer &amp; AI/ML Specialist | Jaipur</title>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -104,6 +104,8 @@
                 <a href="#experience" class="nav-link">Experience</a>
                 <a href="#achievements" class="nav-link">Achievements</a>
                 <a href="#contact" class="nav-link">Contact</a>
+                <a href="/static/resume.pdf" target="_blank" rel="noopener noreferrer" class="nav-link" aria-label="View Resume PDF">Resume</a>
+                <a href="#contact" class="btn btn-primary nav-hire-cta" aria-label="Hire Me">Hire Me</a>
             </nav>
 
             <button class="mobile-nav-toggle" aria-label="Toggle Menu" id="mobileNavToggle">
@@ -145,10 +147,11 @@
                     </div>
 
                     <div class="hero-actions">
-                        <a href="#contact" class="btn btn-primary" aria-label="Hire Me">Hire Me</a>
-                        <a href="#projects" class="btn btn-secondary" aria-label="View Projects">View Projects</a>
-                        <a href="/static/resume.pdf" class="btn btn-cta" download="Rohit_Jha_Resume.pdf" aria-label="Download Resume">Download Resume</a>
-                        <a href="#contact" class="btn btn-secondary" aria-label="Contact Me">Contact Me</a>
+                        <a href="#projects" class="btn btn-primary" aria-label="View my projects">View Projects</a>
+                        <a href="/static/resume.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" aria-label="Download Resume PDF">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                            Download Resume
+                        </a>
                     </div>
                     <div class="hero-socials">
                         <a href="https://github.com/rohit200573-commits" target="_blank" class="hero-social-link" aria-label="GitHub Profile">
@@ -470,30 +473,37 @@
                     <!-- Contact Form Card -->
                     <div class="contact-form-card glass">
                         <form id="contactForm" class="contact-form">
+                            <!-- Web3Forms: sends submissions directly to rohit200573@gmail.com -->
+                            <!-- Get your free access key at https://web3forms.com -->
+                            <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY">
+                            <input type="hidden" name="subject" value="New Portfolio Contact from Rohit Jha's Portfolio">
+                            <input type="hidden" name="from_name" value="Portfolio Contact Form">
+                            <input type="checkbox" name="botcheck" id="botcheck" style="display:none" tabindex="-1" aria-hidden="true">
+
                             <div class="form-group">
                                 <label for="name">Your Name</label>
-                                <input type="text" id="name" name="name" placeholder="John Doe" required>
+                                <input type="text" id="name" name="name" placeholder="John Doe" required autocomplete="name">
                             </div>
                             <div class="form-group">
                                 <label for="email">Your Email</label>
-                                <input type="email" id="email" name="email" placeholder="john@example.com" required>
+                                <input type="email" id="email" name="email" placeholder="john@example.com" required autocomplete="email">
                             </div>
                             <div class="form-group">
                                 <label for="phone">Your Phone (Optional)</label>
-                                <input type="tel" id="phone" name="phone" placeholder="+1 (555) 000-0000">
+                                <input type="tel" id="phone" name="phone" placeholder="+91 98765 43210" autocomplete="tel">
                             </div>
                             <div class="form-group">
-                                <label for="subject">Subject</label>
-                                <input type="text" id="subject" name="subject" placeholder="Project Inquiry" required>
+                                <label for="subject_msg">Subject</label>
+                                <input type="text" id="subject_msg" name="subject_msg" placeholder="Project Inquiry" required>
                             </div>
                             <div class="form-group">
                                 <label for="message">Message</label>
                                 <textarea id="message" name="message" rows="5" placeholder="Tell me about your project details..." required></textarea>
                             </div>
-                            <!-- Honeypot Field (hidden from users) -->
-                            <div class="form-group honeypot-field">
-                                <label for="website">Website</label>
-                                <input type="text" id="website" name="website" placeholder="Do not fill this field">
+                            <!-- Honeypot: invisible to humans, bots fill it — submissions with this filled are rejected -->
+                            <div class="form-group honeypot-field" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;pointer-events:none;tab-index:-1;">
+                                <label for="website">Website (leave blank)</label>
+                                <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
                             </div>
                             <button type="submit" class="btn btn-primary btn-block" id="submitBtn">
                                 <span>Send Message</span>

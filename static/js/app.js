@@ -184,55 +184,73 @@ document.addEventListener('DOMContentLoaded', () => {
         type();
     }
 
-    // 4. Contact Form Handling
+    // 4. Contact Form Handling (Web3Forms + Local Archive)
     contactForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-        
+
+        // Client-side honeypot check — reject if bot filled the hidden field
+        const honeypot = document.getElementById('website').value;
+        if (honeypot) return;
+
+        // Botcheck — reject if checkbox is checked (bots do this)
+        const botcheck = document.getElementById('botcheck');
+        if (botcheck && botcheck.checked) return;
+
         // UI Feedback
         submitBtn.disabled = true;
         spinner.classList.remove('hidden');
         submitBtn.querySelector('span').textContent = 'Sending...';
 
-        const phone = document.getElementById('phone').value;
-        const rawMessage = document.getElementById('message').value;
-        const honeypot = document.getElementById('website').value;
-        const fullMessage = phone ? `[Phone: ${phone}]\n\n${rawMessage}` : rawMessage;
-
-        const formData = {
-            name: document.getElementById('name').value,
-            email: document.getElementById('email').value,
-            subject: document.getElementById('subject').value,
-            message: fullMessage,
-            website: honeypot
-        };
+        const name    = document.getElementById('name').value.trim();
+        const email   = document.getElementById('email').value.trim();
+        const phone   = document.getElementById('phone').value.trim();
+        const subject = document.getElementById('subject_msg').value.trim();
+        const rawMsg  = document.getElementById('message').value.trim();
+        const fullMsg = phone ? `[Phone: ${phone}]\n\n${rawMsg}` : rawMsg;
 
         try {
-            const response = await fetch('/api/messages', {
+            // ── Primary: Web3Forms (sends email to rohit200573@gmail.com) ──
+            const web3Data = new FormData(contactForm);
+            // Override the hidden subject with the user's subject line
+            web3Data.set('subject', `[Portfolio] ${subject} — from ${name}`);
+            web3Data.set('message', fullMsg);
+
+            const w3Res = await fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                body: web3Data
+            });
+            const w3Json = await w3Res.json();
+
+            if (!w3Json.success) {
+                throw new Error(w3Json.message || 'Web3Forms submission failed. Please try again.');
+            }
+
+            // ── Secondary (silent): Archive to local Flask backend ──
+            fetch('/api/messages', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(formData)
-            });
+                body: JSON.stringify({ name, email, subject, message: fullMsg, website: '' })
+            }).catch(() => {}); // silent — don't block UX on local-archive failure
 
-            const result = await response.json();
-            if (response.ok) {
-                showToast('Message sent successfully!', 'success');
-                contactForm.reset();
-                submitBtn.querySelector('span').textContent = "Message sent! I'll reply within 24 hours ✓";
-                submitBtn.classList.add('btn-success-state');
-                setTimeout(() => {
-                    submitBtn.querySelector('span').textContent = 'Send Message';
-                    submitBtn.classList.remove('btn-success-state');
-                }, 5000);
-            } else {
-                throw new Error(result.error || 'Failed to send message');
-            }
+            // ── Success UI ──
+            showToast('Message sent! I\'ll reply within 24 hours ✓', 'success');
+            contactForm.reset();
+            submitBtn.querySelector('span').textContent = 'Message Sent ✓';
+            submitBtn.classList.add('btn-success-state');
+            setTimeout(() => {
+                submitBtn.querySelector('span').textContent = 'Send Message';
+                submitBtn.classList.remove('btn-success-state');
+            }, 5000);
+
         } catch (error) {
-            console.error('Error sending message:', error);
-            showToast(error.message || 'An error occurred. Please try again later.', 'error');
+            console.error('Contact form error:', error);
+            showToast(error.message || 'Something went wrong. Please email me directly.', 'error');
         } finally {
             submitBtn.disabled = false;
             spinner.classList.add('hidden');
-            submitBtn.querySelector('span').textContent = 'Send Message';
+            if (!submitBtn.classList.contains('btn-success-state')) {
+                submitBtn.querySelector('span').textContent = 'Send Message';
+            }
         }
     });
 

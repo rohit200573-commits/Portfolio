@@ -1432,3 +1432,81 @@ input:focus, textarea:focus {
     opacity: 1 !important;
 }
 
+/* ==========================================================================
+   NAV HIRE ME CTA BUTTON
+   ========================================================================== */
+.nav-hire-cta {
+    padding: 10px 22px !important;
+    font-size: 0.9rem !important;
+    border-radius: var(--radius-full) !important;
+    min-height: 44px;
+    min-width: 44px;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    flex-shrink: 0;
+}
+
+/* ==========================================================================
+   WCAG 2.1 MINIMUM TOUCH TARGET (44×44px)
+   ========================================================================== */
+.btn,
+.social-icon,
+.hero-social-link,
+.scroll-to-top-btn,
+.filter-btn,
+.project-link-btn,
+.mobile-nav-toggle,
+.sticky-hire-btn,
+.nav-link {
+    min-height: 44px;
+    min-width: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Nav links are inline — override min-height without forcing row height */
+.nav-link {
+    min-height: 44px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+/* ==========================================================================
+   ACHIEVEMENTS SECTION — SINGLE COLUMN ON MOBILE (≤640px)
+   ========================================================================== */
+@media (max-width: 640px) {
+    #achievements .about-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    #achievements .certifications-card {
+        width: 100%;
+    }
+}
+
+/* ==========================================================================
+   FOCUS-VISIBLE — EXPLICIT KEYBOARD OUTLINE FOR BUTTONS & INPUTS
+   ========================================================================== */
+.btn:focus-visible,
+.nav-hire-cta:focus-visible,
+.filter-btn:focus-visible,
+.project-link-btn:focus-visible,
+.social-icon:focus-visible,
+.hero-social-link:focus-visible,
+.scroll-to-top-btn:focus-visible {
+    outline: 2px solid var(--accent-indigo) !important;
+    outline-offset: 3px !important;
+    box-shadow: 0 0 12px rgba(99, 102, 241, 0.6) !important;
+}
+
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+    outline: 2px solid var(--accent-indigo) !important;
+    outline-offset: 2px !important;
+    box-shadow: 0 0 12px rgba(99, 102, 241, 0.3) !important;
+}
+
+
+
