@@ -1,0 +1,17 @@
+# Python
+venv/
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+
+# Databases
+# portfolio.db
+
+# IDEs and OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db

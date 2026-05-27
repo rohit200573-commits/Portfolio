@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Dashboard | Admin</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/admin.css">
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%2308090d'/%3E%3Ctext x='50%25' y='65%25' dominant-baseline='middle' text-anchor='middle' font-family='monospace' font-weight='bold' font-size='50' fill='%236366f1'%3E%26lt;/%26gt;%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+    <!-- Theme Background Effects -->
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
+
+    <!-- Login Overlay -->
+    <div id="loginOverlay" class="login-overlay">
+        <div class="login-card glass">
+            <h2>Admin Login</h2>
+            <p>Access the portfolio control dashboard</p>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="Enter password (default: admin)" required>
+                </div>
+                <div class="error-msg hidden" id="loginError">Invalid password. Try again.</div>
+                <button type="submit" class="btn btn-primary btn-block">Log In</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Dashboard Layout -->
+    <div id="dashboardLayout" class="dashboard-layout hidden">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar glass">
+            <div class="sidebar-header">
+                <h3>Admin Panel</h3>
+                <span class="status-indicator">Online</span>
+            </div>
+            <nav class="sidebar-nav">
+                <button class="sidebar-link active" data-target="profile-tab">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                    <span>Profile Settings</span>
+                </button>
+                <button class="sidebar-link" data-target="projects-tab">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+                    <span>Manage Projects</span>
+                </button>
+                <button class="sidebar-link" data-target="messages-tab">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                    <span>Inbox Messages</span>
+                    <span class="badge hidden" id="msgBadge">0</span>
+                </button>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="/" class="btn btn-secondary btn-block text-center mb-2">View Site</a>
+                <button id="logoutBtn" class="btn btn-danger btn-block">Log Out</button>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Profile Settings Panel -->
+            <section id="profile-tab" class="dashboard-tab-panel active">
+                <div class="panel-header">
+                    <h2>Edit Profile Information</h2>
+                    <p>Modify Landing Page text, bio, social links, and skills.</p>
+                </div>
+                <form id="profileForm" class="panel-card glass">
+                    <div class="form-row">
+                        <div class="form-group col-6">
+                            <label for="profName">Name</label>
+                            <input type="text" id="profName" required>
+                        </div>
+                        <div class="form-group col-6">
+                            <label for="profTitle">Title / Role</label>
+                            <input type="text" id="profTitle" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="profBio">Short Bio (Landing Page)</label>
+                        <textarea id="profBio" rows="3" required></textarea>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-6">
+                            <label for="profEmail">Contact Email</label>
+                            <input type="email" id="profEmail" required>
+                        </div>
+                        <div class="form-group col-6">
+                            <label for="profLinkedin">LinkedIn URL</label>
+                            <input type="url" id="profLinkedin">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-6">
+                            <label for="profGithub">GitHub URL</label>
+                            <input type="url" id="profGithub">
+                        </div>
+                        <div class="form-group col-6">
+                            <label for="profTwitter">Twitter URL</label>
+                            <input type="url" id="profTwitter">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="profSkills">Skills (Comma-separated, e.g., Python, Flask, React)</label>
+                        <input type="text" id="profSkills" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Save Profile Settings</button>
+                </form>
+            </section>
+
+            <!-- Projects Management Panel -->
+            <section id="projects-tab" class="dashboard-tab-panel">
+                <div class="panel-header flex-between">
+                    <div>
+                        <h2>Manage Projects</h2>
+                        <p>Create, update, or remove projects shown in your portfolio.</p>
+                    </div>
+                    <button id="addProjectBtn" class="btn btn-success">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                        <span>Add New Project</span>
+                    </button>
+                </div>
+                
+                <div class="projects-list-table glass">
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Category</th>
+                                    <th>Tags</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="projectsTableBody">
+                                <!-- Populated dynamically by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Messages Panel -->
+            <section id="messages-tab" class="dashboard-tab-panel">
+                <div class="panel-header">
+                    <h2>Inbox Messages</h2>
+                    <p>Review contact requests submitted from the landing page contact form.</p>
+                </div>
+                <div class="messages-container" id="messagesList">
+                    <!-- Populated dynamically by JS -->
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Project Form Modal -->
+    <div id="projectModal" class="modal-overlay hidden">
+        <div class="modal-card glass">
+            <div class="modal-header">
+                <h3 id="modalTitle">Add Project</h3>
+                <button class="close-modal-btn" id="closeModalBtn">&times;</button>
+            </div>
+            <form id="projectForm">
+                <input type="hidden" id="projectId">
+                <div class="form-group">
+                    <label for="projTitle">Project Title</label>
+                    <input type="text" id="projTitle" required>
+                </div>
+                <div class="form-group">
+                    <label for="projDesc">Description</label>
+                    <textarea id="projDesc" rows="3" required></textarea>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-6">
+                        <label for="projCategory">Category</label>
+                        <select id="projCategory" required>
+                            <option value="web">Web App</option>
+                            <option value="ai">AI Solution</option>
+                            <option value="mobile">Mobile-First</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-6">
+                        <label for="projTags">Tags (Comma-separated)</label>
+                        <input type="text" id="projTags" placeholder="Flask, SQLite, Javascript" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="projImage">Image URL</label>
+                    <input type="text" id="projImage" placeholder="/static/images/placeholder.png">
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-6">
+                        <label for="projLive">Live Demo URL</label>
+                        <input type="url" id="projLive">
+                    </div>
+                    <div class="form-group col-6">
+                        <label for="projGithub">GitHub Repo URL</label>
+                        <input type="url" id="projGithub">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="cancelModalBtn">Cancel</button>
+                    <button type="submit" class="btn btn-success" id="saveProjectBtn">Save Project</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast hidden"></div>
+
+    <script src="/static/js/admin.js"></script>
+</body>
+</html>
