@@ -72,7 +72,7 @@ def add_security_headers(response):
         "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; "
         "font-src 'self' https://fonts.gstatic.com; "
         "img-src 'self' data: https://rohit-portfolio-pi-mocha.vercel.app; "
-        "connect-src 'self';"
+        "connect-src 'self' https://api.web3forms.com;"
     )
     return response
 
@@ -86,6 +86,62 @@ def home():
 @requires_auth
 def admin():
     return send_from_directory(app.static_folder, 'admin.html')
+
+# ── Hidden Personalised Greeting Pages ──────────────────────────────────────
+PERSONALISED_PAGES = {
+    'google-internship':   ('Google', 'Software Engineering Intern'),
+    'microsoft-internship':('Microsoft', 'Software Engineering Intern'),
+    'meta-internship':     ('Meta', 'Engineering Intern'),
+    'amazon-internship':   ('Amazon', 'SDE Intern'),
+    'github-internship':   ('GitHub', 'Software Engineering Intern'),
+}
+
+@app.route('/<slug>')
+def personalised_landing(slug):
+    info = PERSONALISED_PAGES.get(slug)
+    if not info:
+        return send_from_directory(app.static_folder, 'index.html')
+    company, role = info
+    html_content = f"""
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Rohit Jha — Applying to {company}</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *{{margin:0;padding:0;box-sizing:border-box}}
+  body{{font-family:'Outfit',sans-serif;background:#08090d;color:#f1f5f9;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}}
+  .card{{max-width:680px;width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:24px;padding:56px 48px;text-align:center;backdrop-filter:blur(20px)}}
+  .emoji{{font-size:4rem;margin-bottom:24px;display:block}}
+  h1{{font-size:2.2rem;font-weight:800;margin-bottom:8px;background:linear-gradient(135deg,#6366f1,#a855f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent}}
+  .role{{color:#a855f7;font-size:1.1rem;font-weight:600;margin-bottom:32px}}
+  p{{color:#94a3b8;line-height:1.8;font-size:1.05rem;margin-bottom:20px}}
+  strong{{color:#f1f5f9}}
+  .skills{{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:28px 0}}
+  .tag{{background:rgba(99,102,241,0.15);border:1px solid rgba(99,102,241,0.3);color:#818cf8;padding:6px 16px;border-radius:100px;font-size:0.85rem;font-weight:600}}
+  .cta{{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,#6366f1,#a855f7);color:#fff;padding:14px 32px;border-radius:100px;font-weight:700;text-decoration:none;font-size:1rem;margin-top:16px;transition:transform 0.2s,box-shadow 0.2s}}
+  .cta:hover{{transform:translateY(-2px);box-shadow:0 0 30px rgba(168,85,247,0.4)}}
+  .back{{display:block;margin-top:24px;color:#64748b;font-size:0.9rem;text-decoration:none}}
+  .back:hover{{color:#94a3b8}}
+</style></head><body>
+<div class="card">
+  <span class="emoji">👋</span>
+  <h1>Hi, {company} Team!</h1>
+  <p class="role">Re: {role} Application</p>
+  <p>I'm <strong>Rohit Jha</strong>, a Full Stack Developer and AI/ML Specialist based in Jaipur, India. I created this page specifically for your team to show I sweat the details — and I'm genuinely excited about contributing to {company}.</p>
+  <p>I build production-grade full-stack applications (React, Flask, Python, SQLite) and have hands-on AI/ML experience training CNNs that achieve <strong>95%+ accuracy</strong> on medical imaging datasets. I'm a BCA student specialising in AI & Machine Learning (2025–2028).</p>
+  <div class="skills">
+    <span class="tag">Python</span><span class="tag">React</span><span class="tag">Flask</span>
+    <span class="tag">TensorFlow</span><span class="tag">Node.js</span><span class="tag">MongoDB</span>
+    <span class="tag">REST APIs</span><span class="tag">Git</span><span class="tag">UI/UX</span>
+  </div>
+  <p>If you're reviewing my application, I'd love to walk you through my portfolio and GitHub projects. I'm available for a call any time that works for you!</p>
+  <a href="mailto:rohit200573@gmail.com" class="cta">📧 Let's Talk — rohit200573@gmail.com</a>
+  <a href="/" class="back">← View Full Portfolio</a>
+</div>
+</body></html>"""
+    return html_content, 200, {{'Content-Type': 'text/html'}}
 
 @app.route('/robots.txt')
 def robots():

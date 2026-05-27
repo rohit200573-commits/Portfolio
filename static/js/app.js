@@ -296,30 +296,40 @@ document.addEventListener('DOMContentLoaded', () => {
 
     sections.forEach(section => observer.observe(section));
 
-    // 9. Scroll to Top Button
+    // 9. Scroll to Top Button — show after scrolling past hero
     const scrollToTopBtn = document.getElementById('scrollToTopBtn');
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 300) {
-            scrollToTopBtn.classList.remove('hidden');
-        } else {
-            scrollToTopBtn.classList.add('hidden');
-        }
-    });
+    const heroSection = document.getElementById('home');
+
+    const scrollObserver = new IntersectionObserver(
+        ([entry]) => {
+            if (!entry.isIntersecting) {
+                scrollToTopBtn.classList.add('visible');
+                scrollToTopBtn.classList.remove('hidden');
+            } else {
+                scrollToTopBtn.classList.remove('visible');
+            }
+        },
+        { threshold: 0.1 }
+    );
+    if (heroSection) scrollObserver.observe(heroSection);
 
     scrollToTopBtn.addEventListener('click', () => {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
-    // 7. Filter Buttons Event Listeners
+    // 7. Filter Buttons — smooth fade + card reveal
     filterButtons.addEventListener('click', (e) => {
         if (e.target.classList.contains('filter-btn')) {
             document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
             e.target.classList.add('active');
             activeCategory = e.target.getAttribute('data-category');
-            loadProjects(activeCategory);
+            // Fade out grid, load, fade in
+            projectsGrid.classList.add('filtering');
+            setTimeout(() => {
+                loadProjects(activeCategory).then(() => {
+                    projectsGrid.classList.remove('filtering');
+                });
+            }, 200);
         }
     });
 
@@ -352,6 +362,36 @@ document.addEventListener('DOMContentLoaded', () => {
             .replace(/"/g, '&quot;')
             .replace(/'/g, '&#039;');
     }
+
+    // 10. Animated Skill Bars & Stats CountUp (triggered once on scroll into view)
+    function animateValue(el, end, suffix, duration) {
+        let start = 0;
+        const step = Math.ceil(end / (duration / 16));
+        const timer = setInterval(() => {
+            start = Math.min(start + step, end);
+            el.textContent = start + suffix;
+            if (start >= end) clearInterval(timer);
+        }, 16);
+    }
+
+    const statsObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            // Animate stat counters
+            entry.target.querySelectorAll('[data-count]').forEach(el => {
+                const end = parseInt(el.dataset.count, 10);
+                const suffix = el.dataset.suffix || '';
+                animateValue(el, end, suffix, 1200);
+            });
+            // Animate skill bars
+            entry.target.querySelectorAll('.skill-bar-fill[data-width]').forEach(bar => {
+                bar.style.width = bar.dataset.width;
+            });
+            statsObserver.unobserve(entry.target);
+        });
+    }, { threshold: 0.2 });
+
+    document.querySelectorAll('[data-animate-stats]').forEach(el => statsObserver.observe(el));
 
     // Startup Initializations
     async function init() {
