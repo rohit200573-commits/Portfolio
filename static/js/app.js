@@ -27,11 +27,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const data = await response.json();
             
             // Render text fields
-            heroName.textContent = `${data.name} — ${data.title}`;
-            heroBio.textContent = data.bio;
+            if(data.name) heroName.textContent = data.name.split(' ')[0].toUpperCase();
+            if(data.bio && heroBio) heroBio.innerHTML = data.bio + "<br>Based in Jaipur, India";
+            if(aboutFullBio) aboutFullBio.textContent = data.bio;
             
-            // Obfuscate email from scrapers
-            if (data.email) {
+            // Obfuscate email
+            if (data.email && contactEmail) {
                 const parts = data.email.split('@');
                 if (parts.length === 2) {
                     const u = parts[0];
@@ -46,10 +47,9 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             // Render skills
-            if (data.skills && Array.isArray(data.skills)) {
+            if (data.skills && Array.isArray(data.skills) && skillsGrid) {
                 skillsGrid.innerHTML = data.skills.map(skill => `
-                    <div class="skill-badge glass">
-                        <span class="skill-dot"></span>
+                    <div class="skill-badge">
                         <span class="skill-name">${escapeHTML(skill)}</span>
                     </div>
                 `).join('');
@@ -58,39 +58,28 @@ document.addEventListener('DOMContentLoaded', () => {
             // Render social links
             let socials = '';
             if (data.github) {
-                socials += `
-                    <a href="${data.github}" target="_blank" aria-label="GitHub" class="social-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
-                    </a>`;
+                socials += `<a href="${data.github}" target="_blank" class="social-icon">GITHUB</a>`;
             }
             if (data.linkedin) {
-                socials += `
-                    <a href="${data.linkedin}" target="_blank" aria-label="LinkedIn" class="social-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
-                    </a>`;
+                socials += `<span style="color:var(--text-muted)">/</span> <a href="${data.linkedin}" target="_blank" class="social-icon">LINKEDIN</a>`;
             }
             if (data.twitter) {
-                socials += `
-                    <a href="${data.twitter}" target="_blank" aria-label="Twitter" class="social-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>
-                    </a>`;
+                socials += `<span style="color:var(--text-muted)">/</span> <a href="${data.twitter}" target="_blank" class="social-icon">TWITTER</a>`;
             }
-            socialLinksContainer.innerHTML = socials;
+            if(socialLinksContainer) socialLinksContainer.innerHTML = socials;
 
-            // Trigger typing effect with title loaded from database
-            initTypingEffect(data.title || "Full Stack Developer");
         } catch (error) {
             console.error('Error loading profile:', error);
-            initTypingEffect("Full Stack Developer");
         }
     }
 
     // 2. Fetch and Render Projects
     async function loadProjects(category = 'all') {
+        if(!projectsGrid) return;
         projectsGrid.innerHTML = `
             <div class="loading-state">
                 <div class="loader"></div>
-                <p>Loading projects...</p>
+                <p>LOADING...</p>
             </div>
         `;
         try {
@@ -101,8 +90,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (projects.length === 0) {
                 projectsGrid.innerHTML = `
-                    <div class="empty-state glass">
-                        <p>No projects found in this category.</p>
+                    <div class="empty-state">
+                        <p>NO WORKS FOUND.</p>
                     </div>
                 `;
                 return;
@@ -111,26 +100,22 @@ document.addEventListener('DOMContentLoaded', () => {
             projectsGrid.innerHTML = projects.map(proj => {
                 const tagsList = proj.tags ? proj.tags.split(',').map(t => t.trim()) : [];
                 return `
-                    <article class="project-card glass">
+                    <article class="project-card">
                         <div class="project-image-container">
-                            <img src="${escapeHTML(proj.image_url || '/static/images/project-placeholder.png')}" alt="${escapeHTML(proj.title)}" class="project-image" loading="lazy" onerror="this.src='data:image/svg+xml;charset=UTF-8,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'250\' viewBox=\'0 0 400 250\'%3E%3Crect width=\'100%25\' height=\'100%25\' fill=\'%2312131a\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' fill=\'%234f46e5\' dominant-baseline=\'middle\' text-anchor=\'middle\' font-family=\'sans-serif\' font-size=\'18\'%3E${encodeURIComponent(proj.title)}%3C/text%3E%3C/svg%3E'">
-                            <div class="project-overlay">
-                                <div class="project-links">
-                                    ${proj.live_url ? `<a href="${escapeHTML(proj.live_url)}" target="_blank" class="project-link-btn" title="Live Demo" aria-label="View Live Demo of ${escapeHTML(proj.title)}">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                                    </a>` : ''}
-                                    ${proj.github_url ? `<a href="${escapeHTML(proj.github_url)}" target="_blank" class="project-link-btn" title="View Source" aria-label="View GitHub Repository of ${escapeHTML(proj.title)}">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
-                                    </a>` : ''}
-                                </div>
-                            </div>
+                            <img src="${escapeHTML(proj.image_url || '/static/images/project-placeholder.png')}" alt="${escapeHTML(proj.title)}" class="project-image" loading="lazy">
                         </div>
                         <div class="project-info">
-                            <span class="project-category">${escapeHTML(proj.category.toUpperCase())}</span>
-                            <h4 class="project-title">${escapeHTML(proj.title)}</h4>
-                            <p class="project-description">${escapeHTML(proj.description)}</p>
-                            <div class="project-tags">
-                                ${tagsList.map(tag => `<span class="project-tag">${escapeHTML(tag)}</span>`).join('')}
+                            <div>
+                                <h3 class="project-title">${escapeHTML(proj.title)}</h3>
+                                <div class="project-tags">
+                                    <span class="project-tag">${escapeHTML(proj.category)}</span>
+                                    ${tagsList.map(tag => `<span class="project-tag">${escapeHTML(tag)}</span>`).join('')}
+                                </div>
+                                <p class="project-description">${escapeHTML(proj.description)}</p>
+                            </div>
+                            <div class="project-links">
+                                ${proj.live_url ? `<a href="${escapeHTML(proj.live_url)}" target="_blank" class="project-link-btn">LIVE &rarr;</a>` : ''}
+                                ${proj.github_url ? `<a href="${escapeHTML(proj.github_url)}" target="_blank" class="project-link-btn">CODE &rarr;</a>` : ''}
                             </div>
                         </div>
                     </article>
@@ -139,124 +124,74 @@ document.addEventListener('DOMContentLoaded', () => {
         } catch (error) {
             console.error('Error loading projects:', error);
             projectsGrid.innerHTML = `
-                <div class="error-state glass">
-                    <p>Failed to load projects. Please refresh the page.</p>
+                <div class="error-state">
+                    <p>FAILED TO LOAD WORKS.</p>
                 </div>
             `;
         }
     }
 
-    // 3. Typing Animation
-    function initTypingEffect(text) {
-        let index = 0;
-        let isDeleting = false;
-        const speed = 100;
-        const pause = 2000;
-        const words = [text, "UI/UX Designer", "Problem Solver"];
-        let wordIndex = 0;
+    // 4. Contact Form Handling
+    if(contactForm) {
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
 
-        function type() {
-            const currentWord = words[wordIndex];
-            if (isDeleting) {
-                heroTitle.textContent = currentWord.substring(0, index - 1);
-                index--;
-            } else {
-                heroTitle.textContent = currentWord.substring(0, index + 1);
-                index++;
+            const honeypot = document.getElementById('website').value;
+            if (honeypot) return;
+
+            const botcheck = document.getElementById('botcheck');
+            if (botcheck && botcheck.checked) return;
+
+            submitBtn.disabled = true;
+            spinner.classList.remove('hidden');
+            submitBtn.querySelector('span').textContent = 'SENDING...';
+
+            const name    = document.getElementById('name').value.trim();
+            const email   = document.getElementById('email').value.trim();
+            const subject = document.getElementById('subject_msg').value.trim();
+            const rawMsg  = document.getElementById('message').value.trim();
+
+            try {
+                const web3Data = new FormData(contactForm);
+                web3Data.set('subject', `[Portfolio] ${subject} — from ${name}`);
+                web3Data.set('message', rawMsg);
+
+                const w3Res = await fetch('https://api.web3forms.com/submit', {
+                    method: 'POST',
+                    body: web3Data
+                });
+                const w3Json = await w3Res.json();
+
+                if (!w3Json.success) {
+                    throw new Error(w3Json.message || 'Submission failed.');
+                }
+
+                fetch('/api/messages', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, email, subject, message: rawMsg, website: '' })
+                }).catch(() => {});
+
+                showToast('MESSAGE SENT.', 'success');
+                contactForm.reset();
+                submitBtn.querySelector('span').textContent = 'SENT ✓';
+                setTimeout(() => {
+                    submitBtn.querySelector('span').textContent = 'SEND MESSAGE &rarr;';
+                }, 3000);
+
+            } catch (error) {
+                console.error('Contact error:', error);
+                showToast(error.message || 'ERROR. EMAIL DIRECTLY.', 'error');
+            } finally {
+                submitBtn.disabled = false;
+                spinner.classList.add('hidden');
             }
-
-            let typeSpeed = speed;
-            if (isDeleting) {
-                typeSpeed /= 2;
-            }
-
-            if (!isDeleting && index === currentWord.length) {
-                typeSpeed = pause;
-                isDeleting = true;
-            } else if (isDeleting && index === 0) {
-                isDeleting = false;
-                wordIndex = (wordIndex + 1) % words.length;
-                typeSpeed = 500;
-            }
-
-            setTimeout(type, typeSpeed);
-        }
-        type();
+        });
     }
 
-    // 4. Contact Form Handling (Web3Forms + Local Archive)
-    contactForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-
-        // Client-side honeypot check — reject if bot filled the hidden field
-        const honeypot = document.getElementById('website').value;
-        if (honeypot) return;
-
-        // Botcheck — reject if checkbox is checked (bots do this)
-        const botcheck = document.getElementById('botcheck');
-        if (botcheck && botcheck.checked) return;
-
-        // UI Feedback
-        submitBtn.disabled = true;
-        spinner.classList.remove('hidden');
-        submitBtn.querySelector('span').textContent = 'Sending...';
-
-        const name    = document.getElementById('name').value.trim();
-        const email   = document.getElementById('email').value.trim();
-        const phone   = document.getElementById('phone').value.trim();
-        const subject = document.getElementById('subject_msg').value.trim();
-        const rawMsg  = document.getElementById('message').value.trim();
-        const fullMsg = phone ? `[Phone: ${phone}]\n\n${rawMsg}` : rawMsg;
-
-        try {
-            // ── Primary: Web3Forms (sends email to rohit200573@gmail.com) ──
-            const web3Data = new FormData(contactForm);
-            // Override the hidden subject with the user's subject line
-            web3Data.set('subject', `[Portfolio] ${subject} — from ${name}`);
-            web3Data.set('message', fullMsg);
-
-            const w3Res = await fetch('https://api.web3forms.com/submit', {
-                method: 'POST',
-                body: web3Data
-            });
-            const w3Json = await w3Res.json();
-
-            if (!w3Json.success) {
-                throw new Error(w3Json.message || 'Web3Forms submission failed. Please try again.');
-            }
-
-            // ── Secondary (silent): Archive to local Flask backend ──
-            fetch('/api/messages', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ name, email, subject, message: fullMsg, website: '' })
-            }).catch(() => {}); // silent — don't block UX on local-archive failure
-
-            // ── Success UI ──
-            showToast('Message sent! I\'ll reply within 24 hours ✓', 'success');
-            contactForm.reset();
-            submitBtn.querySelector('span').textContent = 'Message Sent ✓';
-            submitBtn.classList.add('btn-success-state');
-            setTimeout(() => {
-                submitBtn.querySelector('span').textContent = 'Send Message';
-                submitBtn.classList.remove('btn-success-state');
-            }, 5000);
-
-        } catch (error) {
-            console.error('Contact form error:', error);
-            showToast(error.message || 'Something went wrong. Please email me directly.', 'error');
-        } finally {
-            submitBtn.disabled = false;
-            spinner.classList.add('hidden');
-            if (!submitBtn.classList.contains('btn-success-state')) {
-                submitBtn.querySelector('span').textContent = 'Send Message';
-            }
-        }
-    });
-
-    // 5. Toast Notifications
     function showToast(message, type = 'success') {
         const toast = document.getElementById('toast');
+        if(!toast) return;
         toast.textContent = message;
         toast.className = `toast toast-${type}`;
         toast.classList.remove('hidden');
@@ -266,93 +201,49 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 4000);
     }
 
-    // 6. Navigation Link Highlighting on Scroll using IntersectionObserver
-    const sections = document.querySelectorAll('section');
-    const navLinksMap = {};
-    navLinks.forEach(link => {
-        const id = link.getAttribute('href');
-        if (id && id.startsWith('#')) {
-            navLinksMap[id.substring(1)] = link;
-        }
-    });
-
-    const observerOptions = {
-        root: null,
-        rootMargin: '-30% 0px -70% 0px',
-        threshold: 0
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const id = entry.target.getAttribute('id');
-                navLinks.forEach(link => link.classList.remove('active'));
-                if (navLinksMap[id]) {
-                    navLinksMap[id].classList.add('active');
-                }
+    // 7. Filter Buttons
+    if(filterButtons) {
+        filterButtons.addEventListener('click', (e) => {
+            if (e.target.classList.contains('filter-btn')) {
+                document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+                e.target.classList.add('active');
+                activeCategory = e.target.getAttribute('data-category');
+                loadProjects(activeCategory);
             }
         });
-    }, observerOptions);
+    }
 
-    sections.forEach(section => observer.observe(section));
+    // 8. Mobile Navigation Toggle
+    if(mobileNavToggle) {
+        mobileNavToggle.addEventListener('click', (e) => {
+            e.preventDefault();
+            navbar.classList.toggle('hidden');
+            navbar.classList.toggle('open');
+        });
 
-    // 9. Scroll to Top Button — show after scrolling past hero
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navbar.classList.add('hidden');
+                navbar.classList.remove('open');
+            });
+        });
+    }
+
+    // Scroll To Top
     const scrollToTopBtn = document.getElementById('scrollToTopBtn');
-    const heroSection = document.getElementById('home');
-
-    const scrollObserver = new IntersectionObserver(
-        ([entry]) => {
-            if (!entry.isIntersecting) {
+    if(scrollToTopBtn) {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) {
                 scrollToTopBtn.classList.add('visible');
-                scrollToTopBtn.classList.remove('hidden');
             } else {
                 scrollToTopBtn.classList.remove('visible');
             }
-        },
-        { threshold: 0.1 }
-    );
-    if (heroSection) scrollObserver.observe(heroSection);
-
-    scrollToTopBtn.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-
-    // 7. Filter Buttons — smooth fade + card reveal
-    filterButtons.addEventListener('click', (e) => {
-        if (e.target.classList.contains('filter-btn')) {
-            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-            e.target.classList.add('active');
-            activeCategory = e.target.getAttribute('data-category');
-            // Fade out grid, load, fade in
-            projectsGrid.classList.add('filtering');
-            setTimeout(() => {
-                loadProjects(activeCategory).then(() => {
-                    projectsGrid.classList.remove('filtering');
-                });
-            }, 200);
-        }
-    });
-
-    // 8. Mobile Navigation Toggle
-    mobileNavToggle.addEventListener('click', () => {
-        navbar.classList.toggle('open');
-        const iconMenu = mobileNavToggle.querySelector('.icon-menu');
-        const iconClose = mobileNavToggle.querySelector('.icon-close');
-        
-        iconMenu.classList.toggle('hidden');
-        iconClose.classList.toggle('hidden');
-    });
-
-    // Close menu when link is clicked
-    navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            navbar.classList.remove('open');
-            mobileNavToggle.querySelector('.icon-menu').classList.remove('hidden');
-            mobileNavToggle.querySelector('.icon-close').classList.add('hidden');
         });
-    });
+        scrollToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
 
-    // Helper: Escaping HTML input
     function escapeHTML(str) {
         if (!str) return '';
         return str
@@ -362,36 +253,6 @@ document.addEventListener('DOMContentLoaded', () => {
             .replace(/"/g, '&quot;')
             .replace(/'/g, '&#039;');
     }
-
-    // 10. Animated Skill Bars & Stats CountUp (triggered once on scroll into view)
-    function animateValue(el, end, suffix, duration) {
-        let start = 0;
-        const step = Math.ceil(end / (duration / 16));
-        const timer = setInterval(() => {
-            start = Math.min(start + step, end);
-            el.textContent = start + suffix;
-            if (start >= end) clearInterval(timer);
-        }, 16);
-    }
-
-    const statsObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (!entry.isIntersecting) return;
-            // Animate stat counters
-            entry.target.querySelectorAll('[data-count]').forEach(el => {
-                const end = parseInt(el.dataset.count, 10);
-                const suffix = el.dataset.suffix || '';
-                animateValue(el, end, suffix, 1200);
-            });
-            // Animate skill bars
-            entry.target.querySelectorAll('.skill-bar-fill[data-width]').forEach(bar => {
-                bar.style.width = bar.dataset.width;
-            });
-            statsObserver.unobserve(entry.target);
-        });
-    }, { threshold: 0.2 });
-
-    document.querySelectorAll('[data-animate-stats]').forEach(el => statsObserver.observe(el));
 
     // Startup Initializations
     async function init() {
