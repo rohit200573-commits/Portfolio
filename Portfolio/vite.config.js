@@ -5,6 +5,11 @@ import { reticle } from '@reticlehq/core/vite';
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [reticle(), react()],
+  base: '/static/',
+  build: {
+    outDir: '../static',
+    emptyOutDir: false,
+  },
   server: {
     proxy: {
       '/api': {
