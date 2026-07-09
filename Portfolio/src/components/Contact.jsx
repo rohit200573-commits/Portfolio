@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { motion } from 'framer-motion';
 
 function Contact() {
   const [loading, setLoading] = useState(false);
@@ -64,36 +65,66 @@ function Contact() {
   };
 
   return (
-    <section id="contact" className="contact reveal-on-scroll">
-      <div className="contact-inner">
-        <h2 className="massive-text">LET'S TALK</h2>
-        <div className="contact-form-wrapper">
-          <form className="minimal-form" onSubmit={handleSubmit}>
+    <section id="contact" className="py-32 border-t border-surface-border">
+      <div className="flex flex-col lg:flex-row justify-between gap-16">
+        
+        <div className="lg:w-1/2">
+          <h2 className="text-massive font-display font-black tracking-tighter leading-none mb-6">
+            LET'S<br/>TALK
+          </h2>
+          <p className="text-secondary text-body-lg max-w-sm mb-12">
+            HAVE A PROJECT IN MIND OR JUST WANT TO SAY HI? FEEL FREE TO REACH OUT.
+          </p>
+        </div>
+
+        <div className="lg:w-1/2 relative">
+          <form className="flex flex-col gap-8" onSubmit={handleSubmit}>
             <input type="hidden" name="access_key" value="5de1ebb9-081e-42b2-8768-642b538b37e1" />
             
-            <div className="form-row">
-              <input type="text" id="name" name="name" placeholder="YOUR NAME" required />
-              <input type="email" id="email" name="email" placeholder="YOUR EMAIL" required />
+            <div className="flex flex-col md:flex-row gap-8">
+              <div className="relative w-full group">
+                <input type="text" id="name" name="name" placeholder="YOUR NAME" required className="w-full bg-transparent border-b border-surface-border py-4 text-primary focus:outline-none focus:border-accent transition-colors placeholder:text-secondary/50 font-bold tracking-widest text-sm uppercase peer" />
+              </div>
+              <div className="relative w-full group">
+                <input type="email" id="email" name="email" placeholder="YOUR EMAIL" required className="w-full bg-transparent border-b border-surface-border py-4 text-primary focus:outline-none focus:border-accent transition-colors placeholder:text-secondary/50 font-bold tracking-widest text-sm uppercase peer" />
+              </div>
             </div>
             
-            <input type="text" id="subject_msg" name="subject_msg" placeholder="SUBJECT" required />
-            <textarea id="message" name="message" rows="3" placeholder="PROJECT DETAILS" required></textarea>
+            <div className="relative w-full group">
+              <input type="text" id="subject_msg" name="subject_msg" placeholder="SUBJECT" required className="w-full bg-transparent border-b border-surface-border py-4 text-primary focus:outline-none focus:border-accent transition-colors placeholder:text-secondary/50 font-bold tracking-widest text-sm uppercase peer" />
+            </div>
+            
+            <div className="relative w-full group">
+              <textarea id="message" name="message" rows="4" placeholder="PROJECT DETAILS" required className="w-full bg-transparent border-b border-surface-border py-4 text-primary focus:outline-none focus:border-accent transition-colors placeholder:text-secondary/50 font-bold tracking-widest text-sm uppercase peer resize-none"></textarea>
+            </div>
             
             {/* Honeypot/Botcheck */}
-            <input type="checkbox" name="botcheck" id="botcheck" style={{ display: 'none' }} tabIndex="-1" />
-            <div className="form-group honeypot-field" style={{ display: 'none' }}>
+            <input type="checkbox" name="botcheck" id="botcheck" className="hidden" tabIndex="-1" />
+            <div className="hidden">
               <input type="text" id="website" name="website" tabIndex="-1" />
             </div>
 
-            <button type="submit" className="btn-pill inverted" disabled={loading}>
-              <span>{loading ? 'SENDING...' : 'SEND MESSAGE \u2192'}</span>
-            </button>
+            <motion.button 
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              type="submit" 
+              disabled={loading}
+              className="self-start px-8 py-4 bg-primary text-background rounded-full font-bold tracking-widest text-sm uppercase hover:bg-accent hover:text-white transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed mt-4"
+            >
+              {loading ? 'SENDING...' : 'SEND MESSAGE \u2192'}
+            </motion.button>
           </form>
           
-          <div className={`toast ${toast.visible ? '' : 'hidden'} ${toast.type === 'error' ? 'toast-error' : ''}`}>
+          <motion.div 
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: toast.visible ? 1 : 0, y: toast.visible ? 0 : 10 }}
+            className={`absolute bottom-[-60px] left-0 px-6 py-3 rounded-full text-sm font-bold tracking-widest uppercase ${toast.type === 'error' ? 'bg-red-500/20 text-red-500 border border-red-500/50' : 'bg-green-500/20 text-green-500 border border-green-500/50'}`}
+            style={{ pointerEvents: toast.visible ? 'auto' : 'none' }}
+          >
             {toast.message}
-          </div>
+          </motion.div>
         </div>
+
       </div>
     </section>
   );
