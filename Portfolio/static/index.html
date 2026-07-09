@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Rohit Jha is a Full Stack Developer and AI/ML Specialist based in Jaipur, India — specializing in web architecture, RESTful APIs, deep learning integrations, and responsive UI development with React, Flask, and Python.">
+    <meta name="keywords"
+        content="Rohit Jha, Full Stack Developer, React Developer, Web Developer, Frontend Developer, Portfolio Website, BCA Student, JavaScript Developer, Python Developer, Flask, SQLite, AI, Machine Learning, Portfolio">
+    <link rel="canonical" href="https://rohit-portfolio-pi-mocha.vercel.app/">
+
+    <!-- Open Graph / Facebook / LinkedIn -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Rohit Jha | Full Stack Developer & AI/ML Specialist | Jaipur">
+    <meta property="og:description"
+        content="Rohit Jha is a Full Stack Developer and AI/ML Specialist based in Jaipur, India — specializing in web architecture, RESTful APIs, deep learning integrations, and responsive UI development with React, Flask, and Python.">
+    <meta property="og:image" content="https://rohit-portfolio-pi-mocha.vercel.app/static/images/avatar.webp">
+    <meta property="og:url" content="https://rohit-portfolio-pi-mocha.vercel.app/">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Rohit Jha | Full Stack Developer & AI/ML Specialist | Jaipur">
+    <meta name="twitter:description"
+        content="Rohit Jha is a Full Stack Developer and AI/ML Specialist based in Jaipur, India — specializing in web architecture, RESTful APIs, deep learning integrations, and responsive UI development with React, Flask, and Python.">
+    <meta name="twitter:image" content="https://rohit-portfolio-pi-mocha.vercel.app/static/images/avatar.webp">
+
+    <!-- JSON-LD Structured Data (Person, WebSite, ProfilePage Schema) -->
+    <script type="application/ld+json">
+    [
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "@id": "https://rohit-portfolio-pi-mocha.vercel.app/#person",
+        "name": "Rohit Jha",
+        "jobTitle": "Full Stack Developer",
+        "url": "https://rohit-portfolio-pi-mocha.vercel.app/",
+        "sameAs": [
+          "https://www.linkedin.com/feed/",
+          "https://github.com/rohit200573-commits"
+        ],
+        "knowsAbout": [
+          "HTML5", "CSS3", "JavaScript", "Python", "Flask", "SQLite", "Git", "REST APIs", "UI/UX Design", "React", "Node.js", "MongoDB", "AI", "Machine Learning"
+        ],
+        "description": "Full Stack Developer & BCA Student specializing in AI & Machine Learning. Building modern web applications using React, Node.js, MongoDB, and AI-powered technologies."
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "@id": "https://rohit-portfolio-pi-mocha.vercel.app/#website",
+        "name": "Rohit Jha Portfolio Website",
+        "url": "https://rohit-portfolio-pi-mocha.vercel.app/",
+        "author": {
+          "@id": "https://rohit-portfolio-pi-mocha.vercel.app/#person"
+        },
+        "description": "Professional portfolio website of Rohit Jha, featuring modern web development projects built using React, Node.js, and Python."
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "ProfilePage",
+        "url": "https://rohit-portfolio-pi-mocha.vercel.app/",
+        "mainEntity": {
+          "@id": "https://rohit-portfolio-pi-mocha.vercel.app/#person"
+        }
+      }
+    ]
+    </script>
+
+    <title>Rohit Jha | Full Stack Developer &amp; AI/ML Specialist | Jaipur</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- Main Style Sheet -->
+    <link rel="stylesheet" href="/static/css/style.css">
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%2308090d'/%3E%3Ctext x='50%25' y='65%25' dominant-baseline='middle' text-anchor='middle' font-family='monospace' font-weight='bold' font-size='50' fill='%236366f1'%3E%26lt;/%26gt;%3C/text%3E%3C/svg%3E">
+</head>
+
+<body>
+    <!-- Sticky Let's Talk Button -->
+    <a href="#contact" class="sticky-hire-btn" aria-label="Hire Me / Let's Talk">Let's Talk</a>
+
+    <!-- Preloader / Splash Screen -->
+    <div id="preloader" class="preloader">
+        <div class="preloader-content">
+            <div class="preloader-logo">&lt;Rohit /&gt;</div>
+            <div class="preloader-bar">
+                <div class="preloader-progress"></div>
+            </div>
+            <p class="preloader-text">Loading portfolio experience...</p>
+        </div>
+    </div>
+
+    <!-- Theme Background Effects -->
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
+
+    <!-- Navigation Header -->
+    <header class="header">
+        <div class="container nav-container">
+            <a href="#" class="logo">
+                <span class="logo-accent">&lt;</span>Rohit<span class="logo-accent"> /&gt;</span>
+            </a>
+
+            <nav class="navbar" id="navbar">
+                <a href="#home" class="nav-link active">Home</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#skills" class="nav-link">Skills</a>
+                <a href="#experience" class="nav-link">Experience</a>
+                <a href="#achievements" class="nav-link">Achievements</a>
+                <a href="#contact" class="nav-link">Contact</a>
+                <a href="/static/resume.pdf" target="_blank" rel="noopener noreferrer" class="nav-link"
+                    aria-label="View Resume PDF">Resume</a>
+                <a href="#contact" class="btn btn-primary nav-hire-cta" aria-label="Hire Me">Hire Me</a>
+            </nav>
+
+            <button class="mobile-nav-toggle" aria-label="Toggle Menu" id="mobileNavToggle">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="icon-menu">
+                    <line x1="4" y1="12" x2="20" y2="12"></line>
+                    <line x1="4" y1="6" x2="20" y2="6"></line>
+                    <line x1="4" y1="18" x2="20" y2="18"></line>
+                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="icon-close hidden">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero-section">
+            <div class="container hero-container">
+                <div class="hero-content">
+                    <span class="hero-subtitle"><span class="typing-text" id="heroTitle">WELCOME TO MY
+                            PORTFOLIO</span><span class="cursor">|</span></span>
+                    <h1 class="hero-title" id="heroName">Rohit Jha — Full Stack Developer & BCA Student</h1>
+                    <h2 class="hero-tagline" id="heroSubheadline">Building modern web applications using React, Node.js,
+                        MongoDB, and AI-powered technologies.</h2>
+                    <p class="hero-description" id="heroBio">I am a passionate Full Stack Developer and BCA Student
+                        specializing in AI & Machine Learning. I help startups and businesses design, develop, and ship
+                        highly-performant, scalable products faster by combining clean code with intuitive UI/UX design.
+                    </p>
+
+                    <!-- Achievement Badges -->
+                    <div class="hero-badges">
+                        <div class="hero-badge glass">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z">
+                                </path>
+                            </svg>
+                            <span>4 Projects Built</span>
+                        </div>
+                        <div class="hero-badge glass">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+                                <path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5"></path>
+                            </svg>
+                            <span>BCA Student</span>
+                        </div>
+                        <div class="hero-badge glass">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <line x1="6" y1="3" x2="6" y2="15"></line>
+                                <circle cx="18" cy="6" r="3"></circle>
+                                <circle cx="6" cy="18" r="3"></circle>
+                                <path d="M18 9a9 9 0 0 1-9 9"></path>
+                            </svg>
+                            <span>Open Source Contributor</span>
+                        </div>
+                        <div class="hero-badge glass">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path
+                                    d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5">
+                                </path>
+                                <line x1="9" y1="18" x2="15" y2="18"></line>
+                                <line x1="10" y1="22" x2="14" y2="22"></line>
+                            </svg>
+                            <span>Problem Solver</span>
+                        </div>
+                    </div>
+
+                    <div class="hero-actions">
+                        <a href="#projects" class="btn btn-primary" aria-label="View my projects">View Projects</a>
+                        <a href="/static/resume.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-secondary"
+                            aria-label="Download Resume PDF">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                <polyline points="7 10 12 15 17 10"></polyline>
+                                <line x1="12" y1="15" x2="12" y2="3"></line>
+                            </svg>
+                            Download Resume
+                        </a>
+                    </div>
+                    <div class="hero-socials">
+                        <a href="https://github.com/rohit200573-commits" target="_blank" class="hero-social-link"
+                            aria-label="GitHub Profile">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path
+                                    d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+                                </path>
+                            </svg>
+                            <span>GitHub</span>
+                        </a>
+                        <a href="https://www.linkedin.com/feed/" target="_blank" class="hero-social-link"
+                            aria-label="LinkedIn Profile">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path
+                                    d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z">
+                                </path>
+                                <rect x="2" y="9" width="4" height="12"></rect>
+                                <circle cx="4" cy="4" r="2"></circle>
+                            </svg>
+                            <span>LinkedIn</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="avatar-card-wrapper">
+                        <div class="avatar-card">
+                            <div class="avatar-inner">
+                                <img src="/static/images/avatar.webp"
+                                    alt="Rohit Jha - Full Stack Developer based in Jaipur, India" class="avatar-image"
+                                    id="avatarImage" loading="lazy">
+                            </div>
+                            <div class="avatar-glow"></div>
+                        </div>
+                        <div class="badge-float badge-float-1 glass">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                                <polyline points="2 17 12 22 22 17"></polyline>
+                                <polyline points="2 12 12 17 22 12"></polyline>
+                            </svg>
+                            <div>
+                                <span class="badge-title">Specialization</span>
+                                <span class="badge-val">AI &amp; ML Focus</span>
+                            </div>
+                        </div>
+                        <div class="badge-float badge-float-2 glass">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                            </svg>
+                            <div>
+                                <span class="badge-title">Projects</span>
+                                <span class="badge-val">4 Production-Grade</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="projects-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Featured Work</h2>
+                    <div class="section-divider"></div>
+                </div>
+
+                <!-- Category Filter -->
+                <div class="filter-wrapper">
+                    <div class="filter-buttons" id="filterButtons">
+                        <button class="filter-btn active" data-category="all">All</button>
+                        <button class="filter-btn" data-category="web">Web Apps</button>
+                        <button class="filter-btn" data-category="ai">AI Solutions</button>
+                        <button class="filter-btn" data-category="mobile">Mobile-First</button>
+                    </div>
+                </div>
+
+                <!-- Projects Grid -->
+                <div class="projects-grid" id="projectsGrid">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="about-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Skills & Profile</h2>
+                    <div class="section-divider"></div>
+                </div>
+                <div class="about-grid">
+                    <div class="about-info glass">
+                        <h3>My Journey</h3>
+                        <p id="aboutFullBio">
+                            I am a passionate Full Stack Developer and BCA Student specializing in AI & Machine
+                            Learning. I help startups and businesses design, develop, and ship highly-performant,
+                            scalable products faster by combining clean code with intuitive UI/UX design.
+                        </p>
+                        <p>
+                            My philosophy is simple: write maintainable code, test rigorously, and design for the
+                            ultimate user experience. I continuously learn and adopt modern technical standards.
+                        </p>
+                        <div class="social-links" id="socialLinks">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+                    <div class="about-skills glass">
+                        <h3>Core Tech Stack</h3>
+                        <div class="skills-grid" id="skillsGrid">
+                            <div class="skill-badge glass"><span class="skill-dot"></span><span
+                                    class="skill-name">HTML5</span></div>
+                            <div class="skill-badge glass"><span class="skill-dot"></span><span
+                                    class="skill-name">CSS3</span></div>
+                            <div class="skill-badge glass"><span class="skill-dot"></span><span
+                                    class="skill-name">JavaScript</span></div>
+                            <div class="skill-badge glass"><span class="skill-dot"></span><span
+                                    class="skill-name">Python</span></div>
+                            <div class="skill-badge glass"><span class="skill-dot"></span><span
+                                    class="skill-name">Flask</span></div>
+                            <div class="skill-badge glass"><span class="skill-dot"></span><span
+                                    class="skill-name">SQLite</span></div>
+                            <div class="skill-badge glass"><span class="skill-dot"></span><span
+                                    class="skill-name">Git</span></div>
+                            <div class="skill-badge glass"><span class="skill-dot"></span><span class="skill-name">REST
+                                    APIs</span></div>
+                            <div class="skill-badge glass"><span class="skill-dot"></span><span class="skill-name">UI/UX
+                                    Design</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience" class="about-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Education &amp; Academic Work</h2>
+                    <div class="section-divider"></div>
+                </div>
+                <div class="about-grid">
+                    <div class="about-info glass">
+                        <h3>Academic &amp; Self-Directed Projects</h3>
+                        <div class="timeline-item" style="margin-bottom: 24px;">
+                            <span class="edu-year">2026 - PRESENT</span>
+                            <h4 class="edu-degree" style="font-size: 1.15rem; margin-top: 4px; margin-bottom: 2px;">Full
+                                Stack &amp; AI Integration</h4>
+                            <p class="edu-inst"
+                                style="margin-bottom: 8px; font-weight: 500; font-size: 0.9rem; color: var(--accent-indigo);">
+                                Academic Work &amp; Personal Lab</p>
+                            <p style="color: var(--text-secondary); font-size: 0.95rem;">Developing responsive,
+                                high-performance web applications using React, Node.js, Flask, and SQLite. Designing
+                                modular, client-server architectures, optimizing frontend assets, and integrating deep
+                                learning classification models.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="edu-year">2025 - 2026</span>
+                            <h4 class="edu-degree" style="font-size: 1.15rem; margin-top: 4px; margin-bottom: 2px;">Deep
+                                Learning &amp; Computer Vision</h4>
+                            <p class="edu-inst"
+                                style="margin-bottom: 8px; font-weight: 500; font-size: 0.9rem; color: var(--accent-indigo);">
+                                Coursework &amp; Research Projects</p>
+                            <p style="color: var(--text-secondary); font-size: 0.95rem;">Built and trained Convolutional
+                                Neural Networks (CNNs) for medical image classification using Python and TensorFlow,
+                                achieving 95%+ triage classification accuracy for MRI screenings.</p>
+                        </div>
+                    </div>
+
+                    <div class="education-card glass">
+                        <h3>Education</h3>
+                        <div class="edu-item">
+                            <span class="edu-year">2025 - 2028</span>
+                            <h4 class="edu-degree">Bachelor of Computer Applications (BCA)</h4>
+                            <span class="edu-spec">Specialization in AI &amp; Machine Learning</span>
+                            <p class="edu-inst">Jaipur, India</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Achievements Section -->
+        <section id="achievements" class="about-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Achievements</h2>
+                    <div class="section-divider"></div>
+                </div>
+
+                <div class="about-grid" style="margin-top: 0;">
+
+                    <!-- NPTEL Elite Certification Card -->
+                    <div class="certifications-card glass"
+                        style="padding: 35px; display: flex; flex-direction: column; justify-content: space-between; border-radius: var(--radius-md);">
+                        <div>
+                            <div style="margin-bottom: 20px;">
+                                <span class="edu-year"
+                                    style="background: rgba(99, 102, 241, 0.1); color: var(--accent-indigo); padding: 6px 12px; border-radius: var(--radius-sm); font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; display: inline-block;">Elite
+                                    Certification</span>
+                                <h3
+                                    style="font-size: 1.4rem; font-weight: 700; color: var(--text-primary); margin-top: 12px; margin-bottom: 6px; border: none; padding-left: 0; line-height: 1.25;">
+                                    NPTEL Online Certification</h3>
+                                <h4
+                                    style="font-size: 1.1rem; color: var(--accent-indigo); font-weight: 500; margin-bottom: 12px;">
+                                    Enhancing Soft Skills and Personality</h4>
+                            </div>
+
+                            <p
+                                style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 20px; line-height: 1.6;">
+                                Awarded by the <strong>Indian Institute of Technology Kanpur (IIT Kanpur)</strong> for
+                                successfully completing an 8-week course funded by the Ministry of Education (MoE),
+                                Government of India.
+                            </p>
+
+                            <div
+                                style="background: rgba(255, 255, 255, 0.015); border: 1px solid var(--border-glass); border-radius: var(--radius-sm); padding: 16px; margin-bottom: 24px;">
+                                <div
+                                    style="display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 0.9rem;">
+                                    <span style="color: var(--text-secondary);">Consolidated Score:</span>
+                                    <strong style="color: var(--text-primary);">62% (Elite Award)</strong>
+                                </div>
+                                <div
+                                    style="display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 0.9rem;">
+                                    <span style="color: var(--text-secondary);">Online Assignments:</span>
+                                    <span style="color: var(--text-primary); font-weight: 500;">24.75 / 25</span>
+                                </div>
+                                <div
+                                    style="display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 0.9rem;">
+                                    <span style="color: var(--text-secondary);">Proctored Exam:</span>
+                                    <span style="color: var(--text-primary); font-weight: 500;">37.07 / 75</span>
+                                </div>
+                                <div
+                                    style="display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 0.9rem;">
+                                    <span style="color: var(--text-secondary);">Credits Recommended:</span>
+                                    <span style="color: var(--accent-teal); font-weight: 600;">3 Academic Credits</span>
+                                </div>
+                                <div
+                                    style="display: flex; justify-content: space-between; font-size: 0.85rem; border-top: 1px solid var(--border-glass); padding-top: 10px; margin-top: 10px;">
+                                    <span style="color: var(--text-muted);">Roll Number:</span>
+                                    <span
+                                        style="color: var(--text-muted); font-family: monospace; letter-spacing: 0.02em;">NPTEL26HS47S1156602178</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <!-- Certificate Thumbnail Preview -->
+                            <div class="certificate-container"
+                                onclick="window.open('/static/images/nptel_certification.webp', '_blank')">
+                                <img src="/static/images/nptel_certification.webp"
+                                    alt="NPTEL Enhancing Soft Skills and Personality Elite Certificate for Rohit Jha from IIT Kanpur"
+                                    class="certificate-thumb" loading="lazy">
+                                <div class="certificate-overlay">
+                                    <span class="btn btn-secondary"
+                                        style="padding: 8px 18px; font-size: 0.85rem; background: rgba(15, 17, 26, 0.9); border-color: var(--border-glass-hover);">View
+                                        Fullscreen &nearr;</span>
+                                </div>
+                            </div>
+                            <a href="/static/images/nptel_certification.webp" target="_blank" class="btn btn-secondary"
+                                style="width: 100%; justify-content: center; display: flex; align-items: center; gap: 8px; font-size: 0.9rem;"
+                                aria-label="Verify NPTEL certificate in new tab">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                    <polyline points="15 3 21 3 21 9"></polyline>
+                                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                                </svg>
+                                Open Certificate
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Techno Tarang Hackathon 3.0 Card -->
+                    <div class="certifications-card glass"
+                        style="padding: 35px; display: flex; flex-direction: column; justify-content: space-between; border-radius: var(--radius-md);">
+                        <div>
+                            <div style="margin-bottom: 20px;">
+                                <span class="edu-year"
+                                    style="background: rgba(20, 184, 166, 0.1); color: var(--accent-teal); padding: 6px 12px; border-radius: var(--radius-sm); font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; display: inline-block;">Hackathon
+                                    Participation</span>
+                                <h3
+                                    style="font-size: 1.4rem; font-weight: 700; color: var(--text-primary); margin-top: 12px; margin-bottom: 6px; border: none; padding-left: 0; line-height: 1.25;">
+                                    Techno Tarang Hackathon 3.0</h3>
+                                <h4
+                                    style="font-size: 1.1rem; color: var(--accent-teal); font-weight: 500; margin-bottom: 12px;">
+                                    Poornima College of Engineering</h4>
+                            </div>
+
+                            <p
+                                style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 20px; line-height: 1.6;">
+                                Awarded Certificate of Participation for competing in the <strong>Techno Tarang
+                                    Hackathon 3.0</strong>, a 24-hour innovation hackathon with the theme <em>"Where
+                                    Code Builds the Future of Earth"</em>.
+                            </p>
+
+                            <div
+                                style="background: rgba(255, 255, 255, 0.015); border: 1px solid var(--border-glass); border-radius: var(--radius-sm); padding: 16px; margin-bottom: 24px;">
+                                <div
+                                    style="display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 0.9rem;">
+                                    <span style="color: var(--text-secondary);">Organized By:</span>
+                                    <strong style="color: var(--text-primary); text-align: right;">PCE Department of
+                                        Computer Engineering</strong>
+                                </div>
+                                <div
+                                    style="display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 0.9rem;">
+                                    <span style="color: var(--text-secondary);">Host Venue:</span>
+                                    <span style="color: var(--text-primary);">PCE Campus, Jaipur, India</span>
+                                </div>
+                                <div
+                                    style="display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 0.9rem;">
+                                    <span style="color: var(--text-secondary);">Event Dates:</span>
+                                    <span style="color: var(--text-primary);">April 18th - 19th, 2026</span>
+                                </div>
+                                <div
+                                    style="display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 0.9rem;">
+                                    <span style="color: var(--text-secondary);">Affiliation:</span>
+                                    <span style="color: var(--text-primary); text-align: right;">RTU, AICTE &amp; UGC
+                                        Accredited</span>
+                                </div>
+                                <div
+                                    style="display: flex; justify-content: space-between; font-size: 0.85rem; border-top: 1px solid var(--border-glass); padding-top: 10px; margin-top: 10px;">
+                                    <span style="color: var(--text-muted);">Collaborators:</span>
+                                    <span style="color: var(--text-muted); text-align: right;">ACM, GRAStech, H2S &amp;
+                                        Swayam</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <!-- Certificate Thumbnail Preview -->
+                            <div class="certificate-container"
+                                onclick="window.open('/static/images/techno_tarang_hackathon.webp', '_blank')">
+                                <img src="/static/images/techno_tarang_hackathon.webp"
+                                    alt="Techno Tarang Hackathon 3.0 Certificate of Participation for Rohit Jha from Poornima College of Engineering"
+                                    class="certificate-thumb" loading="lazy">
+                                <div class="certificate-overlay">
+                                    <span class="btn btn-secondary"
+                                        style="padding: 8px 18px; font-size: 0.85rem; background: rgba(15, 17, 26, 0.9); border-color: var(--border-glass-hover);">View
+                                        Fullscreen &nearr;</span>
+                                </div>
+                            </div>
+                            <a href="/static/images/techno_tarang_hackathon.webp" target="_blank"
+                                class="btn btn-secondary"
+                                style="width: 100%; justify-content: center; display: flex; align-items: center; gap: 8px; font-size: 0.9rem;"
+                                aria-label="Verify Hackathon certificate in new tab">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                    <polyline points="15 3 21 3 21 9"></polyline>
+                                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                                </svg>
+                                Open Certificate
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </section>
+
+        <!-- Projects CTA -->
+        <section class="projects-cta-section glass container">
+            <div class="projects-cta-content">
+                <h3>Want to work on something like this together?</h3>
+                <p>Let's collaborate to build something amazing that scales.</p>
+            </div>
+            <a href="#contact" class="btn btn-primary" aria-label="Start a project together">Start a Project</a>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Get In Touch</h2>
+                    <div class="section-divider"></div>
+                </div>
+                <div class="contact-grid">
+                    <!-- Contact Info Card -->
+                    <div class="contact-info-card glass">
+                        <h3>Let's Collaborate</h3>
+                        <p>Have an exciting project or want to learn more about my skills? Send me a message and I'll
+                            get back to you within 24 hours.</p>
+
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path
+                                        d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                                    </path>
+                                    <polyline points="22,6 12,13 2,6"></polyline>
+                                </svg>
+                            </div>
+                            <div class="info-text">
+                                <span>Email Me</span>
+                                <a href="mailto:rohit200573@gmail.com" id="contactEmail">rohit200573@gmail.com</a>
+                            </div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                    <circle cx="12" cy="10" r="3"></circle>
+                                </svg>
+                            </div>
+                            <div class="info-text">
+                                <span>Location</span>
+                                <span>Jaipur, India</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Form Card -->
+                    <div class="contact-form-card glass">
+                        <form id="contactForm" class="contact-form">
+                            <!-- Web3Forms: sends submissions directly to rohit200573@gmail.com -->
+                            <!-- Get your free access key at https://web3forms.com -->
+                            <input type="hidden" name="access_key" value="5de1ebb9-081e-42b2-8768-642b538b37e1">
+                            <input type="hidden" name="subject"
+                                value="New Portfolio Contact from Rohit Jha's Portfolio">
+                            <input type="hidden" name="from_name" value="Portfolio Contact Form">
+                            <input type="checkbox" name="botcheck" id="botcheck" style="display:none" tabindex="-1"
+                                aria-hidden="true">
+
+                            <div class="form-group">
+                                <label for="name">Your Name</label>
+                                <input type="text" id="name" name="name" placeholder="John Doe" required
+                                    autocomplete="name">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Your Email</label>
+                                <input type="email" id="email" name="email" placeholder="john@example.com" required
+                                    autocomplete="email">
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Your Phone (Optional)</label>
+                                <input type="tel" id="phone" name="phone" placeholder="+91 98765 43210"
+                                    autocomplete="tel">
+                            </div>
+                            <div class="form-group">
+                                <label for="subject_msg">Subject</label>
+                                <input type="text" id="subject_msg" name="subject_msg" placeholder="Project Inquiry"
+                                    required>
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Message</label>
+                                <textarea id="message" name="message" rows="5"
+                                    placeholder="Tell me about your project details..." required></textarea>
+                            </div>
+                            <!-- Honeypot: invisible to humans, bots fill it — submissions with this filled are rejected -->
+                            <div class="form-group honeypot-field" aria-hidden="true"
+                                style="position:absolute;left:-9999px;opacity:0;pointer-events:none;tab-index:-1;">
+                                <label for="website">Website (leave blank)</label>
+                                <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block" id="submitBtn">
+                                <span>Send Message</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="btn-spinner hidden">
+                                    <line x1="12" y1="2" x2="12" y2="6"></line>
+                                    <line x1="12" y1="18" x2="12" y2="22"></line>
+                                    <line x1="4.93" y1="4.93" x2="7.76" y2="7.76"></line>
+                                    <line x1="16.24" y1="16.24" x2="19.07" y2="19.07"></line>
+                                    <line x1="2" y1="12" x2="6" y2="12"></line>
+                                    <line x1="18" y1="12" x2="22" y2="12"></line>
+                                    <line x1="4.93" y1="19.07" x2="7.76" y2="16.24"></line>
+                                    <line x1="16.24" y1="7.76" x2="19.07" y2="4.93"></line>
+                                </svg>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-container">
+            <p>&copy; 2026 Rohit Jha. All rights reserved.</p>
+            <div class="footer-socials">
+                <a href="https://github.com/rohit200573-commits" target="_blank" aria-label="GitHub Profile">GitHub</a>
+                <a href="https://www.linkedin.com/feed/" target="_blank" aria-label="LinkedIn Profile">LinkedIn</a>
+                <a href="#contact" class="btn btn-secondary" style="padding: 6px 16px; font-size: 0.85rem;"
+                    aria-label="Hire Me">Hire Me &rarr;</a>
+            </div>
+            <p class="footer-tagline">Crafted with precision &amp; vanilla elements.</p>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast hidden"></div>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollToTopBtn" class="scroll-to-top-btn glass hidden" aria-label="Scroll to Top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+    </button>
+
+    <!-- Core Javascript -->
+    <script src="/static/js/app.js" defer></script>
+    <!-- AI Resume Assistant Chatbot -->
+    <script src="/static/js/chatbot.js" defer></script>
+</body>
+
+</html>

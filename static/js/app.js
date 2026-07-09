@@ -58,13 +58,13 @@ document.addEventListener('DOMContentLoaded', () => {
             // Render social links
             let socials = '';
             if (data.github) {
-                socials += `<a href="${data.github}" target="_blank" class="social-icon">GITHUB</a>`;
+                socials += `<a href="${data.github}" target="_blank" class="social-icon" aria-label="GitHub Profile">GITHUB</a>`;
             }
             if (data.linkedin) {
-                socials += `<span style="color:var(--text-muted)">/</span> <a href="${data.linkedin}" target="_blank" class="social-icon">LINKEDIN</a>`;
+                socials += `<span style="color:var(--text-muted)">/</span> <a href="${data.linkedin}" target="_blank" class="social-icon" aria-label="LinkedIn Profile">LINKEDIN</a>`;
             }
             if (data.twitter) {
-                socials += `<span style="color:var(--text-muted)">/</span> <a href="${data.twitter}" target="_blank" class="social-icon">TWITTER</a>`;
+                socials += `<span style="color:var(--text-muted)">/</span> <a href="${data.twitter}" target="_blank" class="social-icon" aria-label="Twitter Profile">TWITTER</a>`;
             }
             if(socialLinksContainer) socialLinksContainer.innerHTML = socials;
 
