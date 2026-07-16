@@ -72,7 +72,7 @@ def add_security_headers(response):
         "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; "
         "font-src 'self' https://fonts.gstatic.com; "
         "img-src 'self' data: https://rohit-portfolio-pi-mocha.vercel.app; "
-        "connect-src 'self' https://api.web3forms.com https://raw.githack.com;"
+        "connect-src 'self' https://api.web3forms.com https://raw.githack.com https://raw.githubusercontent.com;"
     )
     return response
 
