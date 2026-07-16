@@ -2,6 +2,7 @@ import { Suspense, lazy } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { Canvas } from '@react-three/fiber';
 import { Environment } from '@react-three/drei';
+import ScrambleText from './ScrambleText';
 
 const HeroScene = lazy(() => import('./3d/HeroScene'));
 
@@ -51,9 +52,10 @@ function Hero({ profile }) {
         animate="visible"
         className="flex justify-between items-start"
       >
-        <motion.div variants={itemVariants} className="text-body-sm md:text-body-md font-medium text-secondary uppercase tracking-widest max-w-xs">
-          <p>NOT A STYLE, A PERSPECTIVE.</p>
-          <p>BECAUSE CODE IS EVERYTHIN'.</p>
+        <motion.div variants={itemVariants} className="text-body-sm md:text-body-md font-sans text-secondary uppercase tracking-widest max-w-xs">
+          <p>Experience</p>
+          <p>the</p>
+          <p className="text-primary font-bold mt-1"><ScrambleText text="Impossible" delay={500} duration={2000} /></p>
         </motion.div>
         
         <motion.div variants={itemVariants}>
@@ -69,8 +71,8 @@ function Hero({ profile }) {
         transition={{ duration: 1, ease: [0.76, 0, 0.24, 1], delay: 0.2 }}
         className="flex justify-center items-center my-12 relative"
       >
-        <h1 className="text-massive font-display font-black tracking-tighter leading-none text-center premium-gradient-text mix-blend-screen">
-          {firstName}
+        <h1 className="text-massive font-display font-black tracking-tighter leading-none text-center premium-gradient-text mix-blend-screen lowercase">
+          <ScrambleText text={firstName} duration={1500} />
         </h1>
       </motion.div>
 

@@ -1,4 +1,6 @@
 import { motion } from 'framer-motion';
+import HorizontalScrollSection from './HorizontalScrollSection';
+import ScrambleText from './ScrambleText';
 
 const experiences = [
   {
@@ -17,59 +19,47 @@ const experiences = [
 
 function Experience() {
   return (
-    <section id="experience" className="py-24 md:py-32 relative z-10">
-      <motion.div 
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.6 }}
-        className="mb-16"
-      >
-        <h2 className="text-display-sm md:text-display-md font-display font-black tracking-tighter uppercase mb-4 mix-blend-difference text-white">
-          Experience <span className="text-accent">&amp;</span> Journey
+    <HorizontalScrollSection>
+      <div className="w-[90vw] md:w-[60vw] h-full flex flex-col justify-center px-6">
+        <h2 className="text-massive font-display font-black tracking-tighter uppercase mb-4 text-white leading-none">
+          <ScrambleText text="EXPERIENCE" delay={200} duration={1500} />
+          <br /><span className="text-accent">&amp; JOURNEY</span>
         </h2>
-        <div className="h-1 w-full max-w-md bg-gradient-to-r from-accent to-transparent"></div>
-      </motion.div>
-
-      <div className="flex flex-col gap-8 md:gap-12 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-surface-border before:to-transparent">
-        
-        {experiences.map((exp, index) => (
-          <motion.div 
-            key={exp.id}
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.8, delay: index * 0.2, ease: [0.76, 0, 0.24, 1] }}
-            className={`relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active`}
-          >
-            {/* Timeline dot */}
-            <div className="flex items-center justify-center w-10 h-10 rounded-full border-4 border-background bg-accent absolute left-0 md:left-1/2 -translate-x-1/2 z-10 group-hover:scale-125 transition-transform duration-500 shadow-[0_0_20px_rgba(168,85,247,0.4)]"></div>
-            
-            {/* Card */}
-            <div className="w-[calc(100%-4rem)] md:w-[calc(50%-3rem)] p-6 md:p-8 rounded-2xl border border-surface-border bg-surface-dark/50 backdrop-blur-md group-hover:border-accent/50 transition-colors duration-500 ml-auto md:ml-0">
-              <span className="font-mono text-accent text-sm tracking-widest mb-2 block">{exp.period}</span>
-              <h3 className="text-2xl font-bold text-white mb-4">{exp.role}</h3>
-              <p className="text-secondary leading-relaxed">{exp.description}</p>
-            </div>
-          </motion.div>
-        ))}
-
-        <motion.div 
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="relative flex items-center justify-center mt-8"
-        >
-          <div className="px-8 py-4 rounded-full border border-surface-border bg-surface-dark/80 backdrop-blur-md text-center shadow-2xl">
-            <p className="text-white font-medium">
-              🐙 <span className="text-accent font-bold">500+</span> GitHub commits & open-source contributions
-            </p>
-          </div>
-        </motion.div>
-
+        <p className="font-mono text-secondary max-w-md">
+          Continuous evolution through code. Pushing boundaries in full-stack development and AI integration.
+        </p>
       </div>
-    </section>
+
+      {experiences.map((exp, index) => (
+        <div 
+          key={exp.id}
+          className="w-[85vw] md:w-[50vw] h-full flex flex-col justify-center shrink-0 group"
+        >
+          <div className="p-8 md:p-12 h-[60vh] max-h-[600px] rounded-3xl border border-surface-border bg-surface-dark/50 backdrop-blur-md group-hover:border-accent/50 transition-colors duration-500 flex flex-col justify-between">
+            <div>
+              <span className="font-mono text-accent text-lg tracking-widest mb-4 block"><ScrambleText text={exp.period} delay={500} /></span>
+              <h3 className="text-4xl md:text-5xl font-display font-bold text-white mb-6 uppercase tracking-tight">{exp.role}</h3>
+              <p className="text-secondary text-lg md:text-xl leading-relaxed">{exp.description}</p>
+            </div>
+            
+            <div className="flex justify-end">
+              <div className="w-16 h-16 rounded-full border border-surface-border flex items-center justify-center text-accent group-hover:bg-accent group-hover:text-background transition-colors duration-300">
+                &rarr;
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+
+      <div className="w-[80vw] md:w-[40vw] h-full flex flex-col justify-center shrink-0">
+        <div className="px-12 py-16 rounded-3xl border border-surface-border bg-surface-dark/80 backdrop-blur-md shadow-2xl flex flex-col items-center justify-center h-[60vh] max-h-[600px]">
+          <h3 className="text-massive font-display font-black text-accent mb-4">500+</h3>
+          <p className="text-white font-mono text-xl text-center uppercase tracking-widest">
+            GitHub commits &<br />open-source contributions
+          </p>
+        </div>
+      </div>
+    </HorizontalScrollSection>
   );
 }
 

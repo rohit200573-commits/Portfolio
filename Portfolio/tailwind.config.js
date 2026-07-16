@@ -23,8 +23,8 @@ export default {
         }
       },
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
-        display: ['Outfit', 'sans-serif'],
+        sans: ['"Martian Mono"', 'monospace'],
+        display: ['"Instrument Serif"', 'serif'],
       },
       fontSize: {
         'massive': 'clamp(4rem, 15vw, 12rem)',
